@@ -1,0 +1,77 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  position: relative;
+  font-family: 'Roboto Flex', sans-serif;
+}
+
+section {
+  /* padding-inline: 2rem; */
+}
+
+.hero-content {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  padding: 10rem 6rem;
+  color: white;
+  display: flex;
+  text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+  font-size: 6rem;
+  font-style: italic;
+  font-weight: 900;
+  text-transform: uppercase;
+  max-width: 10ch;
+  line-height: 0.9;
+}
+
+.hero-content > div:nth-child(2) {
+  align-self: flex-end;
+}
+
+.hero-content h2 {
+  font-size: 4rem;
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: -2px;
+  line-height: 0.9;
+
+  text-transform: uppercase;
+}
+
+.hero-content p {
+  max-width: 40ch;
+}
+
+.scene-container {
+  height: 350dvh;
+  /* position: relative; */
+  /* z-index: 1; */
+}
+
+#canvas {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  position: sticky;
+  top: 0;
+}
+
+#config-canvas {
+  width: 100%;
+  max-width: 800px;
+}
+
+.config-wrapper {
+  width: 100vw;
+  display: flex;
+}
