@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function createHeroScene() {
   const canvas = document.querySelector('#canvas');
-  const container = document.querySelector('.scene-container');
+  const container = document.querySelector('.hero-scene-container');
 
   const bgColorChange = gsap.fromTo(
     container,

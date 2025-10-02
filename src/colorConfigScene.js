@@ -8,31 +8,42 @@ const texturesData = [
     id: 'goodwell',
     name: 'Goodwell',
     path: '/goodwell_uv.png',
+    thumbnail: '/goodwell_thumbnail.webp',
     knobColor: '#E44E21',
   },
   {
     id: 'dreamboard',
     name: 'Dreamboard',
     path: '/dreamboard_uv.png',
+    thumbnail: '/dreamboard_thumbnail.webp',
     knobColor: '#E9759F',
   },
   {
     id: 'cherrynavy',
     name: 'Cherry Navy',
     path: '/cherrynavy_uv.png',
+    thumbnail: '/cherrynavy_thumbnail.webp',
     knobColor: '#F06B7E',
   },
-  { id: 'kick', name: 'Kick', path: '/kick_uv.png', knobColor: '#FD0A0A' },
+  {
+    id: 'kick',
+    name: 'Kick',
+    path: '/kick_uv.png',
+    thumbnail: '/kick_thumbnail.webp',
+    knobColor: '#FD0A0A',
+  },
   {
     id: 'oldschool',
     name: 'Old School',
     path: '/oldschool_uv.png',
+    thumbnail: '/oldschool_thumbnail.webp',
     knobColor: '#B89D82',
   },
   {
     id: 'candykeys',
     name: 'Candy Keys',
     path: '/candykeys_uv.png',
+    thumbnail: '/candykeys_thumbnail.webp',
     knobColor: '#F38785',
   },
 ];
@@ -72,7 +83,7 @@ export function createColorConfigScene() {
       },
     });
     tl.to(keyboardModel.position, {
-      y: 2,
+      y: 0.5,
       duration: 0.4,
       ease: 'power2.out',
       onComplete: () => {
@@ -109,12 +120,24 @@ export function createColorConfigScene() {
     });
   }
 
-  //   generate color buttons DOM element
+  //   Button elements generation
   texturesData.forEach((tex) => {
     const btn = document.createElement('button');
-    btn.innerText = tex.name;
+    btn.classList.add('config-button');
     btn.dataset.id = tex.id;
-    // add image and set styles
+
+    const imgDiv = document.createElement('div');
+    imgDiv.classList.add('config-button-image');
+
+    const img = document.createElement('img');
+    img.src = `/images${tex.thumbnail}`;
+    imgDiv.appendChild(img);
+
+    const text = document.createElement('span');
+    text.innerHTML = tex.name;
+
+    btn.appendChild(imgDiv);
+    btn.appendChild(text);
 
     btn.addEventListener('click', () => {
       handleThemeBtnClick(btn.dataset.id);
@@ -136,9 +159,12 @@ export function createColorConfigScene() {
   camera.position.z = 5;
   scene.add(camera);
 
-  // Key light
-  const keyLight = new THREE.DirectionalLight(0xffffff, 2.2);
-  keyLight.position.set(0, 4, 4);
+  // light
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+  scene.add(ambientLight);
+
+  const keyLight = new THREE.DirectionalLight(0xffffff, 3);
+  keyLight.position.set(0, 4, 0);
   keyLight.castShadow = true;
   scene.add(keyLight);
 
