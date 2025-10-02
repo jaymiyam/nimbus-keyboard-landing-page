@@ -110,6 +110,9 @@ h1 {
 }
 
 /* Features bento grid */
+.features {
+  padding-block: 8rem;
+}
 
 .bento-grid {
   display: grid;
@@ -124,6 +127,8 @@ h1 {
   border-radius: 2rem;
   overflow: hidden;
   padding: 2rem;
+  display: flex;
+  align-items: flex-end;
 }
 
 .bento-cell > img {
@@ -165,9 +170,10 @@ h1 {
 
 /* Color config */
 .color-config {
+  position: relative;
+  padding-block: 8rem;
   background-color: rgb(23, 39, 67);
   color: white;
-  padding-block: 5rem;
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
 }
 
@@ -233,23 +239,75 @@ h1 {
   object-fit: contain;
 }
 
+.color-config > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Color config SVG background */
+.svg-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+svg.text-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.text-svg text {
+  font-family: 'Roboto Flex', sans-serif;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -1px;
+  font-style: italic;
+  fill: rgba(255, 255, 255, 0.3);
+  text-shadow: none;
+}
+
 /* marquee */
 .marquee {
+  width: 100vw;
+  height: 200px;
+  position: relative;
   background-color: #eaeded;
   color: #b5bfc1;
   font-family: 'Roboto Condensed', sans-serif;
-  font-size: 16rem;
+  font-size: 10rem;
   font-weight: bold;
   font-style: italic;
   text-transform: uppercase;
   letter-spacing: -5px;
+  overflow-x: hidden;
+}
+
+.marquee-track {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: hidden;
+}
+
+.marquee-logo {
+  display: grid;
+  place-items: center;
 }
 
 .marquee-content {
+  height: 100%;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 2rem;
-  animation: scrolling 8s infinite linear;
+  animation: scrolling 20s infinite linear;
+  margin-right: 2rem;
 }
 
 .marquee-content > span {
@@ -263,6 +321,38 @@ h1 {
   to {
     transform: translateX(-100%);
   }
+}
+
+/* CTA section */
+.cta {
+  padding-block: 5rem;
+  text-align: center;
+
+  p {
+    font-size: 1.5rem;
+  }
+}
+
+.cta-button {
+  width: 100%;
+  margin-top: 1rem;
+  cursor: pointer;
+  border: 10px solid #ddd;
+  background-color: #0077b6;
+  padding: 3rem 1rem;
+  border-radius: 1000px;
+  font-size: 8rem;
+  color: white;
+  font-weight: 600;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -3px;
+  transition: all 0.2s ease-in;
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+  border-color: #333;
 }
 
 /* footer */

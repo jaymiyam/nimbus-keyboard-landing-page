@@ -66,20 +66,63 @@ function createTextures() {
   return textures;
 }
 
+function createSvgOverlay(overlayText) {
+  // clear the previous overlay
+  document.querySelector('.svg-overlay').innerHTML = '';
+
+  // Parameters
+  const ROWS = 10;
+  const REPEATS_PER_ROW = 50;
+
+  // Create SVG namespace
+  const svgNS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(svgNS, 'svg');
+  svg.setAttribute('viewBox', '0 0 75 100');
+  svg.classList.add('text-svg');
+
+  // Create the text element
+  const text = document.createElementNS(svgNS, 'text');
+  text.setAttribute('text-anchor', 'middle');
+  text.setAttribute('dominant-baseline', 'middle');
+  text.setAttribute('x', '50%');
+  text.setAttribute('y', '50%');
+
+  // Add tspans
+  for (let i = 0; i < ROWS; i++) {
+    const tspan = document.createElementNS(svgNS, 'tspan');
+    tspan.setAttribute('x', `${(i + 1) * 10}%`);
+    tspan.setAttribute('dy', i === 0 ? -50 : 20);
+    tspan.textContent = Array(REPEATS_PER_ROW).fill(overlayText).join(' ');
+    text.appendChild(tspan);
+  }
+
+  svg.appendChild(text);
+
+  // Append to overlay container
+  document.querySelector('.svg-overlay').appendChild(svg);
+}
+
 export function createColorConfigScene() {
   let keyboardModel;
   let isAnimating = false;
+  let currentTheme = 'goodwell';
   const canvas = document.querySelector('#config-canvas');
   const container = document.querySelector('#config-buttons');
   const keyboardThemes = createTextures();
 
-  function handleThemeBtnClick(id) {
+  createSvgOverlay(currentTheme);
+
+  function handleThemeBtnClick(id, themeName) {
+    if (id === currentTheme) return;
     if (isAnimating) return;
+
     isAnimating = true;
+    createSvgOverlay(themeName);
 
     const tl = gsap.timeline({
       onComplete: () => {
         isAnimating = false;
+        currentTheme = id;
       },
     });
     tl.to(keyboardModel.position, {
@@ -97,6 +140,7 @@ export function createColorConfigScene() {
     });
   }
 
+  // Execution of changing keyboard appearance by theme
   function changeTheme(id) {
     const theme = keyboardThemes[id];
 
@@ -125,6 +169,7 @@ export function createColorConfigScene() {
     const btn = document.createElement('button');
     btn.classList.add('config-button');
     btn.dataset.id = tex.id;
+    btn.dataset.name = tex.name;
 
     const imgDiv = document.createElement('div');
     imgDiv.classList.add('config-button-image');
@@ -140,7 +185,7 @@ export function createColorConfigScene() {
     btn.appendChild(text);
 
     btn.addEventListener('click', () => {
-      handleThemeBtnClick(btn.dataset.id);
+      handleThemeBtnClick(btn.dataset.id, btn.dataset.name);
     });
 
     container.appendChild(btn);
