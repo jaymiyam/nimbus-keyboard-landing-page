@@ -5,10 +5,10 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 let cachedModel = null;
 let materials = null;
 
-function createMaterials() {
+function createMaterials(loadingManager) {
   if (materials) return materials;
 
-  const textureLoader = new THREE.TextureLoader();
+  const textureLoader = new THREE.TextureLoader(loadingManager);
 
   const goodwellTex = textureLoader.load('/textures/goodwell_uv.png');
   goodwellTex.flipY = false;
@@ -70,7 +70,7 @@ function createMaterials() {
   return materials;
 }
 
-export async function loadKeyboardModel() {
+export async function loadKeyboardModel(loadingManager) {
   if (cachedModel) return cachedModel.clone(true);
 
   const {
@@ -81,10 +81,10 @@ export async function loadKeyboardModel() {
     bottomCaseMaterial,
     topCaseMaterial,
     feetMaterial,
-  } = createMaterials();
+  } = createMaterials(loadingManager);
 
-  const loader = new GLTFLoader();
-  const draco = new DRACOLoader();
+  const loader = new GLTFLoader(loadingManager);
+  const draco = new DRACOLoader(loadingManager);
   draco.setDecoderPath('/draco/');
   loader.setDRACOLoader(draco);
 

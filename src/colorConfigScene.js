@@ -102,7 +102,7 @@ function createSvgOverlay(overlayText) {
   document.querySelector('.svg-overlay').appendChild(svg);
 }
 
-export function createColorConfigScene() {
+export function createColorConfigScene(loadingManager) {
   let keyboardModel;
   let isAnimating = false;
   let currentTheme = 'goodwell';
@@ -221,7 +221,7 @@ export function createColorConfigScene() {
   keyLight.shadow.normalBias = 0.002;
 
   // load keyboard model
-  loadKeyboardModel().then((keyboard) => {
+  loadKeyboardModel(loadingManager).then((keyboard) => {
     // set keyboard translations
     keyboard.scale.setScalar(20);
     keyboard.position.set(0.5, -1, 0);

@@ -8,7 +8,7 @@ import { loadKeyboardModel } from './keyboardModel';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function createHeroScene() {
+export function createHeroScene(loadingManager) {
   const canvas = document.querySelector('#canvas');
   const container = document.querySelector('.hero-scene-container');
 
@@ -200,7 +200,7 @@ export function createHeroScene() {
   });
 
   // load keyboard model
-  loadKeyboardModel().then((keyboard) => {
+  loadKeyboardModel(loadingManager).then((keyboard) => {
     // set keyboard translations
     keyboard.scale.setScalar(20);
     keyboard.position.set(0.5, -1, 0);

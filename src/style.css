@@ -39,6 +39,30 @@ body {
   padding: 1rem;
 }
 
+/* Preloader */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: black;
+  display: grid;
+  place-items: center;
+  transition: opacity 0.5s ease-out;
+
+  p {
+    font-size: 2rem;
+    color: white;
+    text-transform: uppercase;
+    font-style: italic;
+    font-weight: bold;
+  }
+}
+
+.preloader.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* header */
 header {
   width: 100vw;
