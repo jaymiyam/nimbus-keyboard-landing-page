@@ -3,12 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/icon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" href="https://fonts.googleapis.com" />
+    <link rel="preload" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VAPOR75 By Nimbus - Premium Mechanical Keyboard</title>
   </head>
@@ -72,25 +73,6 @@
       </div>
       <div class="menu-wrapper">
         <button type="button" class="primary-button">Join Waitlist</button>
-        <button type="button" class="menu-button">
-          <svg
-            stroke="currentColor"
-            fill="none"
-            stroke-width="2"
-            viewBox="0 0 24 24"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="size-5"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <line x1="4" x2="20" y1="12" y2="12"></line>
-            <line x1="4" x2="20" y1="6" y2="6"></line>
-            <line x1="4" x2="20" y1="18" y2="18"></line>
-          </svg>
-          <span class="sr-only">Toggle menu</span>
-        </button>
       </div>
     </header>
     <main>
@@ -803,7 +785,7 @@
           </div>
         </div>
       </section>
-      <section class="cta">
+      <section class="section cta">
         <div class="container spacing-y">
           <h2>Experience Peak Performance</h2>
           <p>Free worldwide shipping • 30-day guarantee • 2-year warranty</p>

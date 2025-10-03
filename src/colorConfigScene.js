@@ -1,6 +1,7 @@
 import { gsap } from 'gsap';
 import * as THREE from 'three';
 import { HDRLoader } from 'three/addons/loaders/HDRLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { loadKeyboardModel } from './keyboardModel';
 
 const texturesData = [
@@ -71,8 +72,8 @@ function createSvgOverlay(overlayText) {
   document.querySelector('.svg-overlay').innerHTML = '';
 
   // Parameters
-  const ROWS = 10;
-  const REPEATS_PER_ROW = 50;
+  const ROWS = 20;
+  const REPEATS_PER_ROW = 10;
 
   // Create SVG namespace
   const svgNS = 'http://www.w3.org/2000/svg';
@@ -85,7 +86,7 @@ function createSvgOverlay(overlayText) {
   text.setAttribute('text-anchor', 'middle');
   text.setAttribute('dominant-baseline', 'middle');
   text.setAttribute('x', '50%');
-  text.setAttribute('y', '50%');
+  // text.setAttribute('y', '50%');
 
   // Add tspans
   for (let i = 0; i < ROWS; i++) {
@@ -231,6 +232,11 @@ export function createColorConfigScene(loadingManager) {
     scene.add(keyboard);
     keyboardModel = keyboard;
   });
+
+  // controls
+  const controls = new OrbitControls(camera, canvas);
+  controls.enablePan = false;
+  controls.enableZoom = false;
 
   // renderer
   const renderer = new THREE.WebGLRenderer({

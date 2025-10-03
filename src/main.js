@@ -1,4 +1,3 @@
-import './style.css';
 import * as THREE from 'three';
 import { createHeroScene } from './heroScene';
 import { createColorConfigScene } from './colorConfigScene';
