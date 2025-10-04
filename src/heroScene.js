@@ -98,54 +98,54 @@ export function createHeroScene(loadingManager) {
   // models
   const loader = new GLTFLoader();
   const draco = new DRACOLoader();
-  draco.setDecoderPath('/draco/');
+  draco.setDecoderPath(`${import.meta.env.BASE_URL}/draco/`);
   loader.setDRACOLoader(draco);
   const textureLoader = new THREE.TextureLoader();
 
   const keycapsGroup = new THREE.Group();
   const keycaps = [
     {
-      texture: '/textures/keycap_uv-1.png',
+      texture: `${import.meta.env.BASE_URL}/textures/keycap_uv-1.png`,
       position: [0, -1, 2],
       rotation: [0.7, 0.1, 0.1],
     },
     {
-      texture: '/textures/keycap_uv-2.png',
+      texture: `${import.meta.env.BASE_URL}/textures/keycap_uv-2.png`,
       position: [1, 2.5, -2],
       rotation: [0.7, 0.1, 0.1],
     },
     {
-      texture: '/textures/keycap_uv-3.png',
+      texture: `${import.meta.env.BASE_URL}/textures/keycap_uv-3.png`,
       position: [-1, 1.1, 1],
       rotation: [0.2, 0.3, 1],
     },
     {
-      texture: '/textures/keycap_uv-4.png',
+      texture: `${import.meta.env.BASE_URL}/textures/keycap_uv-4.png`,
       position: [1.7, 0, 1],
       rotation: [0.7, 0.1, -0.6],
     },
     {
-      texture: '/textures/keycap_uv-5.png',
+      texture: `${import.meta.env.BASE_URL}/textures/keycap_uv-5.png`,
       position: [-1.5, -0.5, 1],
       rotation: [0.7, 0.7, 0.3],
     },
     {
-      texture: '/textures/keycap_uv-6.png',
+      texture: `${import.meta.env.BASE_URL}/textures/keycap_uv-6.png`,
       position: [2, 0, 2],
       rotation: [0.2, 0.9, 0.1],
     },
     {
-      texture: '/textures/keycap_uv-7.png',
+      texture: `${import.meta.env.BASE_URL}/textures/keycap_uv-7.png`,
       position: [-3, 2, -1],
       rotation: [0.7, -0.1, 0.1],
     },
     {
-      texture: '/textures/keycap_uv-8.png',
+      texture: `${import.meta.env.BASE_URL}/textures/keycap_uv-8.png`,
       position: [2, -0.6, 2],
       rotation: [-0.7, 0.1, 0.1],
     },
     {
-      texture: '/textures/keycap_uv-9.png',
+      texture: `${import.meta.env.BASE_URL}/textures/keycap_uv-9.png`,
       position: [-2.2, 0.5, 2],
       rotation: [0.7, 0.1, 0.1],
     },
@@ -153,39 +153,50 @@ export function createHeroScene(loadingManager) {
 
   // keycap model
   keycaps.forEach((item) => {
-    loader.load('/models/keycap/keycap.gltf', (gltf) => {
-      const keycap = gltf.scene;
+    loader.load(
+      import.meta.env.BASE_URL + '/models/keycap/keycap.gltf',
+      (gltf) => {
+        const keycap = gltf.scene;
 
-      const keycapTex = textureLoader.load(item.texture);
-      keycapTex.flipY = false;
-      keycap.scale.setScalar(20);
-      keycap.children[0].material.map = keycapTex;
-      keycap.children[0].material.roughness = 0.7;
-      keycap.position.set(item.position[0], item.position[1], item.position[2]);
-      keycap.rotation.set(item.rotation[0], item.rotation[1], item.rotation[2]);
-      keycap.castShadow = true;
-      keycapsGroup.add(keycap);
+        const keycapTex = textureLoader.load(item.texture);
+        keycapTex.flipY = false;
+        keycap.scale.setScalar(20);
+        keycap.children[0].material.map = keycapTex;
+        keycap.children[0].material.roughness = 0.7;
+        keycap.position.set(
+          item.position[0],
+          item.position[1],
+          item.position[2]
+        );
+        keycap.rotation.set(
+          item.rotation[0],
+          item.rotation[1],
+          item.rotation[2]
+        );
+        keycap.castShadow = true;
+        keycapsGroup.add(keycap);
 
-      // keycaps floating animation
-      gsap.to(keycap.position, {
-        x: '+=' + (Math.random() - 0.5) * 0.1,
-        y: '+=' + (Math.random() - 0.5) * 0.1,
-        z: '+=' + (Math.random() - 0.5) * 0.1,
-        duration: 3,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
+        // keycaps floating animation
+        gsap.to(keycap.position, {
+          x: '+=' + (Math.random() - 0.5) * 0.1,
+          y: '+=' + (Math.random() - 0.5) * 0.1,
+          z: '+=' + (Math.random() - 0.5) * 0.1,
+          duration: 3,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+        });
 
-      gsap.to(keycap.rotation, {
-        x: '+=' + Math.PI * Math.random() * 0.1,
-        y: '+=' + Math.PI * Math.random() * 0.1,
-        duration: 5,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-      });
-    });
+        gsap.to(keycap.rotation, {
+          x: '+=' + Math.PI * Math.random() * 0.1,
+          y: '+=' + Math.PI * Math.random() * 0.1,
+          duration: 5,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+        });
+      }
+    );
   });
   scene.add(keycapsGroup);
 
@@ -251,15 +262,18 @@ export function createHeroScene(loadingManager) {
   // HDR
   const pmremGenerator = new THREE.PMREMGenerator(renderer);
   const hdrLoader = new HDRLoader();
-  hdrLoader.load('/textures/hdr/blue-studio.hdr', (tex) => {
-    const envMap = pmremGenerator.fromEquirectangular(tex).texture;
+  hdrLoader.load(
+    `${import.meta.env.BASE_URL}/textures/hdr/blue-studio.hdr`,
+    (tex) => {
+      const envMap = pmremGenerator.fromEquirectangular(tex).texture;
 
-    scene.environment = envMap;
-    scene.environmentIntensity = 0.2;
+      scene.environment = envMap;
+      scene.environmentIntensity = 0.2;
 
-    tex.dispose();
-    pmremGenerator.dispose();
-  });
+      tex.dispose();
+      pmremGenerator.dispose();
+    }
+  );
 
   // render loop
   function animate() {

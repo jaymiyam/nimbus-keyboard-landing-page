@@ -10,18 +10,24 @@ function createMaterials(loadingManager) {
 
   const textureLoader = new THREE.TextureLoader(loadingManager);
 
-  const goodwellTex = textureLoader.load('/textures/goodwell_uv.png');
+  const goodwellTex = textureLoader.load(
+    `${import.meta.env.BASE_URL}/textures/goodwell_uv.png`
+  );
   goodwellTex.flipY = false;
   goodwellTex.colorSpace = THREE.SRGBColorSpace;
 
-  const knurlTex = textureLoader.load('/textures/Knurl.jpg');
+  const knurlTex = textureLoader.load(
+    `${import.meta.env.BASE_URL}/textures/Knurl.png`
+  );
   knurlTex.flipY = false;
 
   knurlTex.repeat.set(6, 6);
   knurlTex.wrapS = THREE.RepeatWrapping;
   knurlTex.wrapT = THREE.RepeatWrapping;
 
-  const screenTex = textureLoader.load('/textures/screen_uv.png');
+  const screenTex = textureLoader.load(
+    `${import.meta.env.BASE_URL}/textures/screen_uv.png`
+  );
   screenTex.flipY = false;
   screenTex.repeat.set(-1, -1);
   screenTex.offset.set(1, 1);
@@ -85,11 +91,13 @@ export async function loadKeyboardModel(loadingManager) {
 
   const loader = new GLTFLoader(loadingManager);
   const draco = new DRACOLoader(loadingManager);
-  draco.setDecoderPath('/draco/');
+  draco.setDecoderPath(`${import.meta.env.BASE_URL}/draco/`);
   loader.setDRACOLoader(draco);
 
   // keyboard model
-  const gltf = await loader.loadAsync('/models/keyboard/keyboard.gltf');
+  const gltf = await loader.loadAsync(
+    import.meta.env.BASE_URL + '/models/keyboard/keyboard.gltf'
+  );
   const keyboard = gltf.scene;
 
   // set materials

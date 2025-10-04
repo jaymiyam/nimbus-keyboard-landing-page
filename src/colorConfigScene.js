@@ -57,7 +57,9 @@ function createTextures() {
   const textureLoader = new THREE.TextureLoader();
 
   texturesData.forEach((tex) => {
-    const texture = textureLoader.load(`/textures${tex.path}`);
+    const texture = textureLoader.load(
+      `${import.meta.env.BASE_URL}/textures${tex.path}`
+    );
     texture.flipY = false;
     texture.colorSpace = THREE.SRGBColorSpace;
 
@@ -176,7 +178,7 @@ export function createColorConfigScene(loadingManager) {
     imgDiv.classList.add('config-button-image');
 
     const img = document.createElement('img');
-    img.src = `/images${tex.thumbnail}`;
+    img.src = `${import.meta.env.BASE_URL}/images${tex.thumbnail}`;
     imgDiv.appendChild(img);
 
     const text = document.createElement('span');
@@ -266,15 +268,18 @@ export function createColorConfigScene(loadingManager) {
   // HDR
   const pmremGenerator = new THREE.PMREMGenerator(renderer);
   const hdrLoader = new HDRLoader();
-  hdrLoader.load('/textures/hdr/blue-studio.hdr', (tex) => {
-    const envMap = pmremGenerator.fromEquirectangular(tex).texture;
+  hdrLoader.load(
+    `${import.meta.env.BASE_URL}/textures/hdr/blue-studio.hdr`,
+    (tex) => {
+      const envMap = pmremGenerator.fromEquirectangular(tex).texture;
 
-    scene.environment = envMap;
-    scene.environmentIntensity = 0.2;
+      scene.environment = envMap;
+      scene.environmentIntensity = 0.2;
 
-    tex.dispose();
-    pmremGenerator.dispose();
-  });
+      tex.dispose();
+      pmremGenerator.dispose();
+    }
+  );
 
   // render loop
   function animate() {
