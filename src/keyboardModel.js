@@ -17,7 +17,7 @@ function createMaterials(loadingManager) {
   goodwellTex.colorSpace = THREE.SRGBColorSpace;
 
   const knurlTex = textureLoader.load(
-    `${import.meta.env.BASE_URL}/textures/Knurl.png`
+    `${import.meta.env.BASE_URL}/textures/Knurl.jpg`
   );
   knurlTex.flipY = false;
 
