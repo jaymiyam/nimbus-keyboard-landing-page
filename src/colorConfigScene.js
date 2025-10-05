@@ -50,11 +50,11 @@ const texturesData = [
 ];
 let textures = null;
 
-function createTextures() {
+function createTextures(loadingManager) {
   if (textures) return textures;
 
   textures = {};
-  const textureLoader = new THREE.TextureLoader();
+  const textureLoader = new THREE.TextureLoader(loadingManager);
 
   texturesData.forEach((tex) => {
     const texture = textureLoader.load(
@@ -111,7 +111,7 @@ export function createColorConfigScene(loadingManager) {
   let currentTheme = 'goodwell';
   const canvas = document.querySelector('#config-canvas');
   const container = document.querySelector('#config-buttons');
-  const keyboardThemes = createTextures();
+  const keyboardThemes = createTextures(loadingManager);
 
   createSvgOverlay(currentTheme);
 
