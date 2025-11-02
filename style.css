@@ -352,6 +352,12 @@ svg.text-svg {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .marquee-content {
+    animation: none;
+  }
+}
+
 /* CTA section */
 .cta {
   padding-block: 5rem;
