@@ -130,12 +130,26 @@ h1 {
   height: 350dvh;
 }
 
+.hero-scene-title {
+  position: absolute;
+  left: 50%;
+  top: 22%;
+  z-index: 0;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #0077b6;
+  font-size: 10rem;
+  font-weight: 600;
+  line-height: 0.9;
+}
+
 #canvas {
   width: 100vw;
   height: 100vh;
   display: block;
   position: sticky;
   top: 0;
+  z-index: 2;
 }
 
 /* Features bento grid */
@@ -495,6 +509,7 @@ footer {
   h1 {
     max-width: 7ch;
   }
+
   .bento-grid {
     grid-template-columns: 1fr;
   }
@@ -526,6 +541,10 @@ footer {
   .hero-title {
     top: 180px;
     left: 16px;
+  }
+
+  .hero-scene-title {
+    font-size: 6rem;
   }
 
   h1 {
